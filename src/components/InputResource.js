@@ -21,7 +21,7 @@ const InputResource = () => {
     applicationDappDefinitionAddress:
       "account_rdx12y4l35lh2543nfa9pyyzvsh64ssu0dv6fq20gg8suslwmjvkylejgj",
   });
-  const { status, transaction, stream, state } = gatewayApi;
+  const { state } = gatewayApi;
 
   const request = async (e) => {
     e.preventDefault();
@@ -32,11 +32,19 @@ const InputResource = () => {
       );
       setTotalSupply(tokenDetails.details.total_supply);
       setDivisibility(tokenDetails.details.divisibility);
-      setIconURL(tokenDetails.metadata.items[0].value.typed.value);
-      setSymbol(tokenDetails.metadata.items[6].value.typed.value);
-      setName(tokenDetails.metadata.items[4].value.typed.value);
-      setDescription(tokenDetails.metadata.items[7].value.typed.value);
-      setInfoURL(tokenDetails.metadata.items[8].value.typed.value);
+      tokenDetails.metadata.items.map((val, key) => {
+        if (val.key == "description") {
+          setDescription(val.value.typed.value);
+        } else if (val.key === "icon_url") {
+          setIconURL(val.value.typed.value);
+        } else if (val.key === "symbol") {
+          setSymbol(val.value.typed.value);
+        } else if (val.key === "name") {
+          setName(val.value.typed.value);
+        } else if (val.key === "info_url") {
+          setInfoURL(val.value.typed.value);
+        }
+      });
 
       console.log(tokenDetails, "asdfasdf");
     } catch (error) {
