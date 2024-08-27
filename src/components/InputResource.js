@@ -105,7 +105,11 @@ const InputResource = () => {
             <div className="flex gap-2">
               <h2>Icon URL:</h2>
               <p>
-                <a href={iconURL} target="_blank" className="text-[#3a4cf7]">
+                <a
+                  href={iconURL}
+                  target="_blank"
+                  className="text-[#3a4cf7] hover:underline"
+                >
                   {iconURL}
                 </a>
               </p>
@@ -136,7 +140,11 @@ const InputResource = () => {
             <div className="flex gap-2">
               <h2>Info URL:</h2>
               <p>
-                <a href={infoURL} target="_blank" className="text-[#3a4cf7]">
+                <a
+                  href={infoURL}
+                  target="_blank"
+                  className="text-[#3a4cf7] hover:underline"
+                >
                   {infoURL}
                 </a>
               </p>
