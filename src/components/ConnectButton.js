@@ -5,9 +5,10 @@ const ConnectButton = () => {
   useEffect(() => {
     // Initialize the Radix Dapp Toolkit
     const rdt = RadixDappToolkit({
-      dAppDefinitionAddress: "your_dapp_address", // Replace with your dApp address
+      dAppDefinitionAddress:
+        "account_rdx1283mafsdzvsg5ymht7wem794vg8r4k52kapjlffmxn70cc7n0aqwlv", // Replace with your dApp address
       networkId: RadixNetwork.Mainnet, // Use RadixNetwork.Testnet for testnet
-      applicationName: "Your dApp Name",
+      applicationName: "test",
       applicationVersion: "1.0.0",
     });
 
