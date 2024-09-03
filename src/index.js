@@ -1,17 +1,34 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { GatewayApiClient } from "@radixdlt/babylon-gateway-api-sdk";
+import { RadixDappToolkit, RadixNetwork } from "@radixdlt/radix-dapp-toolkit";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App.js";
+import { GatewayApiProvider } from "./context/GatewayApiProvider.jsx";
+import { RdtProvider } from "./context/RdtProvider.jsx";
+import { AccountProvider } from "./AccountContext.jsx";
+import { dAppDefinitionAddress } from "./constants.js";
+import "./index.css"; // Import your Tailwind CSS here
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+// Instantiate Radix Dapp Toolkit for connect button and wallet usage.
+const rdt = RadixDappToolkit({
+  networkId: RadixNetwork.Stokenet,
+  applicationVersion: "1.0.0",
+  applicationName: "Hello Token dApp",
+  applicationDappDefinitionAddress: dAppDefinitionAddress,
+});
+console.log("dApp Toolkit: ", rdt);
+// Instantiate Gateway API for network queries
+const gatewayApi = GatewayApiClient.initialize(rdt.gatewayApi.clientConfig);
+console.log("gatewayApi: ", gatewayApi);
+
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <App />
+    <RdtProvider value={rdt}>
+      <GatewayApiProvider value={gatewayApi}>
+        <AccountProvider>
+          <App />
+        </AccountProvider>
+      </GatewayApiProvider>
+    </RdtProvider>
   </React.StrictMode>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
