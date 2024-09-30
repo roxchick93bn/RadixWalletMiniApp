@@ -7,7 +7,6 @@ function App() {
     <>
       <div className="p-5">
         <ConnectButton />
-        <InputResource />
       </div>
     </>
   );
